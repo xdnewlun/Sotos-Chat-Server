@@ -5,9 +5,14 @@ import java.net.*;
 
 public class ChatClient {
 	
-	public static void main(String []args) {
+	public ChatClient() {
 		try {
 			Socket s = new Socket("localhost",6969);
+			Runtime.getRuntime().addShutdownHook(new Thread() {
+				public void main(String []args) throws IOException {
+					s.close();
+				}
+			});
 			DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 			DataInputStream dis = new DataInputStream(s.getInputStream());
 			while (true) {
@@ -18,10 +23,6 @@ public class ChatClient {
 		}catch(Exception e) {
 			System.out.println(e);
 		}
-		Runtime.getRuntime().addShutdownHook(new Thread(public static void main()
-				s.close();
-			}
-		}));	 
 	}
 }
 //https://stackoverflow.com/questions/8051863/how-can-i-close-the-socket-in-a-proper-way

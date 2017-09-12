@@ -7,7 +7,7 @@ public class ChatClient {
 	
 	public ChatClient() {
 		try {
-			Socket s = new Socket("localhost",6969);
+			Socket s = new Socket("10.4.27.29",6969);
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 				public void main(String []args) throws IOException {
 					s.close();

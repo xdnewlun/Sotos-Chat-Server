@@ -14,8 +14,10 @@ public class ChatServer {
 					ss.close();
 				}
 			});
-			Socket s =ss.accept();
-			new ThreadedServer(s).start();
+			while (true) {
+				Socket s =ss.accept();
+				new ThreadedServer(s).start();
+			}
 		}catch(Exception e) {
 			System.out.println(e);
 		}

@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 
 public class ChatServer {
+	protected Socket s;
+	protected Socket ss;
 	public ChatServer() {
 		try {
 			ServerSocket ss=new ServerSocket(6969);
@@ -13,18 +15,10 @@ public class ChatServer {
 				}
 			});
 			Socket s =ss.accept();
-			DataInputStream dis = new DataInputStream(s.getInputStream());
-			DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-			while (true) {
-				String str=(String)dis.readUTF();
-				String remote = ss.getInetAddress().toString();
-				String newmes = remote + ": " + str;
-				dos.writeUTF(newmes);
-				System.out.println(newmes);
-			}
-			
+			new ThreadedServer(s).start();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
+		new ThreadedServer(s).start();
 	}
 }
